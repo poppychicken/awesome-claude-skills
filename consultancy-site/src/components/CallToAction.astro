@@ -1,0 +1,27 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  heading?: string;
+  body?: string;
+}
+
+const {
+  heading = 'Thinking about AI for your people function?',
+  body = 'A 30-minute call to understand where you are, what you want to change, and whether we are the right fit. No pitch deck.',
+} = Astro.props;
+---
+
+<section class="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+  <div class="rounded-3xl bg-accent text-white px-6 py-12 sm:px-12 sm:py-16 text-center">
+    <h2 class="text-3xl sm:text-4xl font-semibold max-w-2xl mx-auto">{heading}</h2>
+    <p class="mt-4 text-white/80 max-w-xl mx-auto">{body}</p>
+    <div class="mt-8">
+      <a
+        href="/book"
+        class="inline-flex items-center justify-center rounded-full bg-white text-accent px-6 py-3 font-medium hover:bg-accent-soft transition-colors"
+        >Book a call</a
+      >
+    </div>
+  </div>
+</section>

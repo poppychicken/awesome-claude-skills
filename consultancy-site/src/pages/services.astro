@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import CallToAction from '../components/CallToAction.astro';
+
+// Placeholder services — rename, reprice or remove to match your offer.
+const services = [
+  {
+    title: 'AI Readiness Assessment',
+    summary: 'A short, fixed-scope review of your people processes, data and tooling.',
+    outcomes: [
+      'Prioritised shortlist of AI use cases',
+      'Risk, compliance and data-readiness review',
+      'Board-ready recommendations and roadmap',
+    ],
+  },
+  {
+    title: 'Deployment Programme',
+    summary: 'Hands-on implementation of one or more prioritised use cases.',
+    outcomes: [
+      'Vendor selection or custom build',
+      'Integration with your HRIS / ATS',
+      'Training and change management for users',
+    ],
+  },
+  {
+    title: 'Governance & Responsible AI',
+    summary: 'Policies and controls so AI in people decisions stays fair, lawful and explainable.',
+    outcomes: [
+      'AI usage policy and decision rights',
+      'Bias and impact assessment process',
+      'Ongoing monitoring framework',
+    ],
+  },
+];
+---
+
+<Base title="Services" description="Assessment, deployment and governance services for AI in human capital.">
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 pt-20 pb-12">
+    <h1 class="text-4xl sm:text-5xl font-semibold">Services</h1>
+    <p class="mt-4 text-lg text-muted max-w-2xl">
+      Start small with an assessment, or bring us in to deploy and govern AI across your people function.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 pb-8 grid gap-6 lg:grid-cols-3">
+    {
+      services.map((s) => (
+        <article class="rounded-2xl border border-line bg-white p-8 flex flex-col">
+          <h2 class="text-2xl font-semibold">{s.title}</h2>
+          <p class="mt-3 text-muted">{s.summary}</p>
+          <ul class="mt-6 space-y-2 text-sm">
+            {s.outcomes.map((o) => (
+              <li class="flex gap-2">
+                <span class="text-accent" aria-hidden="true">
+                  ✓
+                </span>
+                {o}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </section>
+
+  <CallToAction heading="Not sure where to start?" body="Most clients begin with a short call. We will suggest the smallest useful next step." />
+</Base>

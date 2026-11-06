@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { site } from '../config';
+---
+
+<Base title="About" description={`About ${site.name}.`}>
+  <section class="mx-auto max-w-3xl px-4 sm:px-6 pt-20 pb-12">
+    <h1 class="text-4xl sm:text-5xl font-semibold">About</h1>
+    <div class="mt-8 space-y-5 text-lg text-muted">
+      <!-- Placeholder: replace with your story, background and credentials. -->
+      <p>
+        {site.name} was founded to close the gap between what AI can do and what actually gets deployed in
+        people-focused organisations.
+      </p>
+      <p>
+        Tell your story here: your background in HR, talent or technology, why you started the consultancy, and
+        the kinds of organisations you work best with.
+      </p>
+      <p>
+        Add credentials that matter to your buyers — past roles, sectors, notable outcomes (with permission), and
+        any certifications.
+      </p>
+    </div>
+  </section>
+
+  <CallToAction />
+</Base>
