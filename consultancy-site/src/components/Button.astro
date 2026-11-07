@@ -1,18 +1,21 @@
 ---
 interface Props {
   href: string;
-  variant?: 'primary' | 'secondary';
+  /** primary/secondary for light backgrounds; inverse/outline-light for dark backgrounds */
+  variant?: 'primary' | 'secondary' | 'inverse' | 'outline-light';
   size?: 'sm' | 'md';
 }
 
 const { href, variant = 'primary', size = 'md' } = Astro.props;
 
 const base =
-  'inline-flex items-center justify-center rounded-full font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+  'inline-flex items-center justify-center rounded-full font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2';
 const sizes = { sm: 'px-4 py-2 text-sm', md: 'px-6 py-3 text-base' };
 const variants = {
-  primary: 'bg-accent text-white hover:bg-ink',
-  secondary: 'border border-line bg-white text-ink hover:border-ink',
+  primary: 'bg-accent text-white hover:bg-navy focus-visible:outline-accent',
+  secondary: 'border border-line bg-white text-ink hover:border-ink focus-visible:outline-accent',
+  inverse: 'bg-white text-navy hover:bg-accent-soft focus-visible:outline-white',
+  'outline-light': 'border border-white/40 text-white hover:bg-white/10 focus-visible:outline-white',
 };
 ---
 

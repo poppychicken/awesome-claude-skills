@@ -1,6 +1,6 @@
 # Consultancy site
 
-Astro + Tailwind site for an AI-in-human-capital consultancy. The primary action is booking a call.
+Astro + Tailwind site for a small AI strategy and implementation consultancy. The primary action is booking a call.
 
 ## Commands
 

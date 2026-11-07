@@ -4,23 +4,35 @@ import CallToAction from '../components/CallToAction.astro';
 import { site } from '../config';
 ---
 
-<Base title="About" description={`About ${site.name}.`}>
+<Base title="About" description={`About ${site.name}: two former executives helping businesses put AI at the centre.`}>
   <section class="mx-auto max-w-3xl px-4 sm:px-6 pt-20 pb-12">
     <h1 class="text-4xl sm:text-5xl font-semibold">About</h1>
     <div class="mt-8 space-y-5 text-lg text-muted">
-      <!-- Placeholder: replace with your story, background and credentials. -->
+      <!-- Placeholder: replace with your own story. -->
       <p>
-        {site.name} was founded to close the gap between what AI can do and what actually gets deployed in
-        people-focused organisations.
+        {site.name} is two former executives who have led businesses through major change. We started it because
+        too much AI work stops at the strategy deck, or starts building before anyone has asked what matters.
       </p>
       <p>
-        Tell your story here: your background in HR, talent or technology, why you started the consultancy, and
-        the kinds of organisations you work best with.
+        We do both: help you decide where AI belongs in your business, then roll up our sleeves to make it work.
+        Staying small means you always get us, not a team we have hired to stand in for us.
       </p>
-      <p>
-        Add credentials that matter to your buyers — past roles, sectors, notable outcomes (with permission), and
-        any certifications.
-      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 sm:px-6 pb-8">
+    <h2 class="text-2xl font-semibold">The founders</h2>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2">
+      {
+        site.founders.map((f) => (
+          <article class="rounded-2xl border border-line bg-white p-6">
+            <div class="h-14 w-14 rounded-full bg-brand-gradient" aria-hidden="true" />
+            <h3 class="mt-4 text-xl font-semibold">{f.name}</h3>
+            <p class="text-sm text-accent font-medium">{f.role}</p>
+            <p class="mt-3 text-muted text-sm">{f.bio}</p>
+          </article>
+        ))
+      }
     </div>
   </section>
 
