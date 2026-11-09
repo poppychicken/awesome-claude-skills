@@ -1,0 +1,40 @@
+---
+import { site } from '../../config';
+---
+
+<section id="about" aria-labelledby="about-title" class="scroll-mt-16">
+  <div class="mx-auto grid max-w-6xl gap-14 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20">
+    <div>
+      <h2 id="about-title" class="text-5xl font-bold sm:text-6xl">About</h2>
+      <div class="mt-8 max-w-[60ch] space-y-5 text-lg text-muted">
+        <!-- Placeholder: replace with your own story. -->
+        <p>
+          {site.name} is two former executives who have led businesses through major change. We started it because
+          too much AI work stops at the strategy deck, or starts building before anyone has asked what matters.
+        </p>
+        <p>
+          We do both: help you decide where AI belongs in your business, then roll up our sleeves to make it work.
+          Staying small means you always get us, not a team we have hired to stand in for us.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-semibold text-muted">The founders</h3>
+      <ul class="mt-4 divide-y divide-line border-y border-line">
+        {
+          site.founders.map((f) => (
+            <li class="flex gap-5 py-6">
+              <div class="size-16 shrink-0 rounded-full bg-brand-gradient" aria-hidden="true" />
+              <div>
+                <p class="font-display text-xl font-bold">{f.name}</p>
+                <p class="text-sm font-medium text-teal">{f.role}</p>
+                <p class="mt-2 text-muted">{f.bio}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

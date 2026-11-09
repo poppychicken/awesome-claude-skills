@@ -1,0 +1,57 @@
+---
+import { Check, Mail } from 'lucide-react';
+import { site } from '../../config';
+
+const expectations = [
+  '30 minutes, video call',
+  'You speak with both founders',
+  'An honest view of where AI could help your business',
+  'No obligation and no sales deck',
+];
+---
+
+<section id="contact" aria-labelledby="contact-title" class="scroll-mt-16 bg-brand-gradient text-white">
+  <div class="mx-auto grid max-w-6xl gap-12 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+    <div>
+      <h2 id="contact-title" class="text-5xl font-bold sm:text-6xl">Where could AI change your business?</h2>
+      <p class="mt-5 max-w-[48ch] text-lg text-white">
+        Book a 30-minute conversation with both founders. We will talk about where you are, what you want to
+        change, and whether we are the right fit.
+      </p>
+      <ul class="mt-8 space-y-3">
+        {
+          expectations.map((e) => (
+            <li class="flex items-start gap-3">
+              <Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-aqua" strokeWidth={2.25} />
+              <span>{e}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href={`mailto:${site.email}`}
+        class="mt-10 inline-flex items-center gap-2 text-white underline decoration-white/40 hover:decoration-white"
+      >
+        <Mail aria-hidden="true" className="size-4" />
+        Prefer email? {site.email}
+      </a>
+    </div>
+
+    <div class="min-h-[560px] overflow-hidden rounded-3xl bg-white text-ink shadow-[0_24px_60px_-24px_rgb(0_0_0/0.45)]">
+      {
+        site.bookingUrl ? (
+          <iframe src={site.bookingUrl} title="Book a call with Pop Consulting" class="h-[680px] w-full border-0" loading="lazy" />
+        ) : (
+          <div class="grid h-full min-h-[560px] place-items-center p-8 text-center text-muted">
+            <p>
+              Booking calendar goes here.
+              <br />
+              Set <code class="text-ink">bookingUrl</code> in <code class="text-ink">src/config.ts</code> to your
+              Cal.com or Calendly link.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

@@ -1,7 +1,16 @@
 ---
 import { site } from '../config';
+
+interface Props {
+  inverse?: boolean;
+}
+const { inverse = false } = Astro.props;
 ---
 
-<a href="/" class="font-display text-xl font-bold tracking-tight text-ink" aria-label={`${site.name}, home`}>
-  pop<span class="text-pink">.</span>consulting
+<a
+  href="/"
+  class:list={['font-display text-xl font-bold tracking-tight', inverse ? 'text-white' : 'text-ink']}
+  aria-label={`${site.name}, home`}
+>
+  pop<span class="text-coral">.</span>consulting
 </a>

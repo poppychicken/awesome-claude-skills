@@ -1,0 +1,45 @@
+---
+const steps = [
+  {
+    title: 'Discover',
+    body: 'Understand your business, your data and your ambitions, and where AI could genuinely move the needle.',
+  },
+  {
+    title: 'Decide',
+    body: 'Set a focused AI strategy: the few bets worth making, the business case, and what you will not do.',
+  },
+  {
+    title: 'Deliver',
+    body: 'Build, buy or integrate the right tools, working alongside your team to get them into daily use.',
+  },
+  {
+    title: 'Embed',
+    body: 'Put the skills, governance and measures in place so the change sticks and keeps compounding.',
+  },
+];
+// The order is the method, so the step numbers carry information.
+const stepDots = ['bg-aqua', 'bg-sun', 'bg-coral', 'bg-white'];
+---
+
+<section id="approach" aria-labelledby="approach-title" class="scroll-mt-16 bg-teal-deep text-white">
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
+    <div class="max-w-2xl">
+      <h2 id="approach-title" class="text-5xl font-bold sm:text-6xl">How we work</h2>
+      <p class="mt-5 text-lg text-white/85">One team from first conversation to lasting change.</p>
+    </div>
+    <ol
+      class="relative mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:before:absolute lg:before:inset-x-0 lg:before:top-[7px] lg:before:h-px lg:before:bg-white/25 lg:before:content-['']"
+    >
+      {
+        steps.map((s, i) => (
+          <li class="relative">
+            <span aria-hidden="true" class:list={['block size-[15px] rounded-full ring-4 ring-teal-deep', stepDots[i]]} />
+            <p class="mt-6 font-display text-sm font-semibold tabular-nums text-aqua">Step {i + 1}</p>
+            <h3 class="mt-1 text-2xl font-bold">{s.title}</h3>
+            <p class="mt-3 max-w-[34ch] text-white/85">{s.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

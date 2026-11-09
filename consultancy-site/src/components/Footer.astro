@@ -1,30 +1,29 @@
 ---
-import { site } from '../config';
+import { site, sectionHref } from '../config';
 import Logo from './Logo.astro';
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-line">
+<footer class="bg-teal-night text-white">
   <div class="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-[1fr_auto] sm:px-6">
     <div class="space-y-3">
-      <Logo />
-      <p class="max-w-sm text-sm text-muted">{site.tagline}.</p>
+      <Logo inverse />
+      <p class="max-w-sm text-sm text-white/80">{site.tagline}.</p>
     </div>
     <nav aria-label="Footer" class="text-sm">
       <ul class="flex flex-wrap gap-x-6 gap-y-3">
         {
           site.nav.map((item) => (
             <li>
-              <a href={item.href} class="text-muted hover:text-ink">
+              <a href={sectionHref(item.id)} class="text-white/80 hover:text-white">
                 {item.label}
               </a>
             </li>
           ))
         }
-        <li><a href="/book" class="text-muted hover:text-ink">Book a call</a></li>
-        <li><a href={`mailto:${site.email}`} class="text-muted hover:text-ink">{site.email}</a></li>
+        <li><a href={`mailto:${site.email}`} class="text-white/80 hover:text-white">{site.email}</a></li>
       </ul>
     </nav>
-    <p class="text-xs text-muted sm:col-span-2">© {year} {site.name}</p>
+    <p class="text-xs text-white/70 sm:col-span-2">© {year} {site.name}</p>
   </div>
 </footer>

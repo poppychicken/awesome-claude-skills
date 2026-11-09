@@ -26,12 +26,12 @@ const headline = 'AI strategy and implementation, led by former executives.';
 function BookButton({ inverse = false }: { inverse?: boolean }) {
   return (
     <a
-      href="/book"
+      href="#contact"
       className={
         'inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ' +
         (inverse
           ? 'bg-white text-ink hover:bg-sun focus-visible:outline-white'
-          : 'bg-violet text-white hover:bg-ink focus-visible:outline-violet')
+          : 'bg-teal text-white hover:bg-teal-night focus-visible:outline-teal')
       }
     >
       Book a call <ArrowRight aria-hidden="true" className="size-4" />
@@ -95,9 +95,9 @@ export default function PopHero() {
         scrollLength={2.2}
         enterLabel="Scroll to step inside"
         style={{
-          '--gp-paper': '#fffaf3',
-          '--gp-ink': '#16112e',
-          '--gp-field': '#5b2bff',
+          '--gp-paper': '#f5faf7',
+          '--gp-ink': '#0b2423',
+          '--gp-field': '#007a74',
           '--gp-foreground': '#ffffff',
         }}
         background={
