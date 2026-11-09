@@ -31,7 +31,7 @@ const reasons = [
   },
 ];
 
-const headline = "AI strategy and implementation, led by former executives.";
+const headline = "Strategy, AI and digital transformation, led by former executives.";
 
 function BookButton({ inverse = false }: { inverse?: boolean }) {
   return (

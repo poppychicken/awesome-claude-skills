@@ -1,9 +1,9 @@
 // Central place for site-wide settings. Edit these first.
 export const site = {
   name: 'Pop Consulting',
-  tagline: 'Strategy and implementation, with AI at the centre',
+  tagline: 'Strategy, AI and digital transformation',
   description:
-    'A small, senior consultancy led by two former executives. We help leadership teams decide where AI should change their business, then make it happen.',
+    'A small, senior consultancy led by two former executives. We help leadership teams with strategy, AI and digital transformation, from the first decision through to delivery.',
   email: 'hello@pop.consulting',
   // Paste your Cal.com or Calendly link here, e.g. https://cal.com/you/intro
   // Leave empty to show a placeholder in the Contact section.
