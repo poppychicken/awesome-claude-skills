@@ -1,6 +1,6 @@
 # Consultancy site
 
-Astro + Tailwind site for a small AI strategy and implementation consultancy. The primary action is booking a call.
+Astro + Tailwind site for Pop Consulting (pop.consulting), a small AI strategy and implementation consultancy. The primary action is booking a call.
 
 ## Commands
 
@@ -16,7 +16,8 @@ npm run preview
 - `src/config.ts`: name, tagline, email, nav, and **`bookingUrl`** (your Cal.com or Calendly link)
 - `src/styles/global.css`: colours and fonts (`@theme` tokens)
 - `src/pages/`: `index`, `services`, `about`, `book`, `404`
-- `astro.config.mjs`: set `site` to your real domain before deploying
+- `src/components/PopHero.tsx`: home hero built on `src/components/ui/glyph-portal.tsx` (MIT, Christian Katzmann)
+- `astro.config.mjs`: production domain (`https://pop.consulting`)
 
 All page copy is placeholder text. Replace it once your positioning is settled.
 

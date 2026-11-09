@@ -2,10 +2,15 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
+import react from '@astrojs/react';
+
 export default defineConfig({
-  // Set this to your real domain before deploying (used for canonical URLs).
-  site: 'https://example.com',
+  // Production domain (used for canonical URLs).
+  site: 'https://pop.consulting',
+
   vite: {
     plugins: [tailwindcss()],
   },
+
+  integrations: [react()],
 });

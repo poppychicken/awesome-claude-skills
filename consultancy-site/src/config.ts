@@ -1,10 +1,10 @@
 // Central place for site-wide settings. Edit these first.
 export const site = {
-  name: 'Your Consultancy',
+  name: 'Pop Consulting',
   tagline: 'Strategy and implementation, with AI at the centre',
   description:
     'A small, senior consultancy led by two former executives. We help leadership teams decide where AI should change their business, then make it happen.',
-  email: 'hello@example.com',
+  email: 'hello@pop.consulting',
   // Paste your Cal.com or Calendly link here, e.g. https://cal.com/you/intro
   // Leave empty to show a placeholder on the booking page.
   bookingUrl: '',
