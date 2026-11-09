@@ -8,6 +8,11 @@ export default defineConfig({
   // Production domain (used for canonical URLs).
   site: 'https://pop.consulting',
 
+  // Dev only: accept forwarded/preview hostnames (cloud previews, tunnels).
+  server: {
+    allowedHosts: true,
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
