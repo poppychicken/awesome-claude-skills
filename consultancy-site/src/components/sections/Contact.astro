@@ -10,11 +10,11 @@ const expectations = [
 ];
 ---
 
-<section id="contact" aria-labelledby="contact-title" class="scroll-mt-16 bg-brand-gradient text-ink">
+<section id="contact" aria-labelledby="contact-title" class="scroll-mt-16 bg-hero-blend-readable text-white">
   <div class="mx-auto grid max-w-6xl gap-12 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
     <div>
       <h2 id="contact-title" class="text-5xl font-bold sm:text-6xl">What should change in your business next?</h2>
-      <p class="mt-5 max-w-[48ch] text-lg text-ink">
+      <p class="mt-5 max-w-[48ch] text-lg text-white">
         Book a 30-minute conversation with both founders. We will talk about where you are, what you want to
         change, and whether we are the right fit.
       </p>
@@ -22,7 +22,7 @@ const expectations = [
         {
           expectations.map((e) => (
             <li class="flex items-start gap-3">
-              <Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-ink" strokeWidth={2.25} />
+              <Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-reef" strokeWidth={2.25} />
               <span>{e}</span>
             </li>
           ))
@@ -30,7 +30,7 @@ const expectations = [
       </ul>
       <a
         href={`mailto:${site.email}`}
-        class="mt-10 inline-flex items-center gap-2 font-medium text-ink underline decoration-ink/40 hover:decoration-ink"
+        class="mt-10 inline-flex items-center gap-2 font-medium text-white underline decoration-white/50 hover:decoration-white"
       >
         <Mail aria-hidden="true" className="size-4" />
         Prefer email? {site.email}

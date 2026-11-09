@@ -9,7 +9,7 @@ const WORD = "POP";
 const FACE = '"Bricolage Grotesque Variable"';
 const FALLBACK = '"Arial Black", Arial, sans-serif';
 /**
- * The "mounir" Axis Blend from 21st.dev (90deg linear: Abyss, Marine, Teal, Reef). It fills the
+ * The "mounir" Axis Blend from 21st.dev, brightened (90deg: Abyss, Marine, Teal, Reef). It fills the
  * letters, then becomes the backdrop of the panel the zoom opens into. Defined in global.css.
  */
 const FIELD_CLASS = "bg-hero-blend";
@@ -25,11 +25,11 @@ const CUE_MIN_H = 1000;
 const wordHeight = (H: number) =>
   Math.min(H * 0.55, Math.max(H * 0.3, 1.08 * H - (H >= CUE_MIN_H ? 586 : 510)));
 
-// Site palette: mostly teal, some aqua, the odd sun spark, on charcoal.
+// Hero blend palette on charcoal: mostly Teal, some Reef, the odd Marine.
 const PARTICLES: ParticlesPalette = {
-  particles: ["#00c2ae", "#00c2ae", "#5ff5dc", "#5ff5dc", "#ffd23f"],
-  lines: "#00c2ae",
-  accent: "#5ff5dc",
+  particles: ["#38b3c6", "#38b3c6", "#9be8d8", "#9be8d8", "#1a6fa3"],
+  lines: "#38b3c6",
+  accent: "#9be8d8",
 };
 
 const reasons = [
@@ -47,7 +47,7 @@ const reasons = [
   },
 ];
 
-const headline = "Strategy, AI and digital transformation, led by former executives.";
+const headline = "Strategy, AI and digital transformation.";
 
 function BookButton() {
   return (
@@ -158,7 +158,7 @@ export default function PopHero() {
             "--gp-paper": "transparent",
             "--gp-ink": "#ffffff",
             // Used as the panel background when motion is off (reduced motion).
-            "--gp-field": "#1d1f20",
+            "--gp-field": "#08243b",
             "--gp-foreground": "#ffffff",
           }}
           background={
@@ -173,13 +173,13 @@ export default function PopHero() {
                 style={{ opacity: "calc((1 - var(--gp-reveal, 0)) * 0.3)" }}
               />
               {/* Fades in with the panel text, graded to the blend: none over Abyss/Marine (already
-                  8:1+ with white), building to 50% charcoal over Reef. Worst case 5.2:1 for white text. */}
+                  8:1+ with white), building to 66% Abyss over Reef. Worst case 4.74:1 for white text. */}
               <div
                 className="absolute inset-0"
                 style={{
                   opacity: "var(--gp-reveal, 0)",
                   backgroundImage:
-                    "linear-gradient(90deg, rgb(18 19 20 / 0) 0%, rgb(18 19 20 / 0) 33%, rgb(18 19 20 / 0.24) 67%, rgb(18 19 20 / 0.5) 100%)",
+                    "linear-gradient(90deg, rgb(8 36 59 / 0) 0%, rgb(8 36 59 / 0) 33%, rgb(8 36 59 / 0.4) 67%, rgb(8 36 59 / 0.66) 100%)",
                 }}
               />
             </div>

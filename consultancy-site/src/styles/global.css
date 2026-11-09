@@ -1,52 +1,56 @@
 @import 'tailwindcss';
 
-/* Pop Consulting: vivid teal against near-black charcoal. Coral and sun are small sparks of pop. */
+/*
+  Pop Consulting palette, built on the hero blend (21st.dev "mounir", brightened):
+  Abyss -> Marine -> Teal -> Reef, with near-black charcoal behind the hero word.
+*/
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, sans-serif;
 
-  --color-teal: #00c2ae; /* fills and buttons; pair with ink text */
-  --color-teal-ink: #00786e; /* teal text and icons on light backgrounds (5:1) */
-  --color-graphite: #1d1f20; /* bands that carry white text */
-  --color-charcoal: #121314; /* hero ground and footer */
-  --color-aqua: #5ff5dc;
-  --color-coral: #ff5f4a;
-  --color-sun: #ffd23f;
+  --color-abyss: #08243b; /* dark bands and footer; white text 15.8:1 */
+  --color-marine: #1a6fa3;
+  --color-teal: #38b3c6; /* fills and buttons; pair with ink text (7.1:1) */
+  --color-teal-ink: #12507a; /* marine for text and icons on light backgrounds (8:1) */
+  --color-reef: #9be8d8; /* highlights on dark backgrounds (11:1 on abyss) */
+  --color-graphite: #1d1f20;
+  --color-charcoal: #121314; /* hero ground, so the blend's dark end still reads */
 
-  --color-ink: #161819;
-  --color-line: #d5e5e0;
-  --color-paper: #f5faf7;
-  --color-accent: #00786e;
-  --color-accent-soft: #d4f5ee;
+  --color-ink: #14191d;
+  --color-line: #d4e2ea;
+  --color-paper: #f5f9fb;
+  --color-accent: #12507a;
+  --color-accent-soft: #dcf0f3;
 
   /* shadcn semantic names, mapped onto the palette so ui/ components drop in unchanged. */
-  --color-background: #f5faf7;
-  --color-foreground: #161819;
-  --color-primary: #00c2ae;
-  --color-primary-foreground: #161819;
-  --color-muted: #e6eeeb; /* subtle surface */
-  --color-muted-foreground: #565c5e; /* secondary text, 6.4:1 on paper */
-  --color-border: #d5e5e0;
+  --color-background: #f5f9fb;
+  --color-foreground: #14191d;
+  --color-primary: #38b3c6;
+  --color-primary-foreground: #14191d;
+  --color-muted: #e7eff3; /* subtle surface */
+  --color-muted-foreground: #4f5f69; /* secondary text, 6.2:1 on paper */
+  --color-border: #d4e2ea;
 }
 
 /*
-  Brand field: vivid teal into cyan with a sun glow. It carries ink text, which stays
-  at 6:1 or better across the whole surface.
-*/
-@utility bg-brand-gradient {
-  background-image:
-    radial-gradient(circle at 86% 14%, rgb(255 210 63 / 0.28), transparent 30%),
-    radial-gradient(circle at 8% 92%, rgb(95 245 220 / 0.5), transparent 40%),
-    linear-gradient(130deg, #00b3a1 0%, #00c9b3 42%, #2adcc6 72%, #00b4c4 100%);
-}
-
-/*
-  Hero blend: "mounir" Axis Blend from 21st.dev. A straight 90deg linear gradient; the original's
-  canvas soften/blur pass is approximated by the plain CSS stops.
+  Hero blend: 21st.dev "mounir" Axis Blend, brightened (each stop about twice as light).
+  A straight 90deg linear gradient; the original's canvas soften pass is approximated by CSS stops.
 */
 @utility bg-hero-blend {
-  background-color: #08243b;
-  background-image: linear-gradient(90deg, #08243b 0%, #12507a 33%, #2e8fa6 67%, #7dd0c0 100%);
+  background-color: #0e3a5c;
+  background-image: linear-gradient(90deg, #0e3a5c 0%, #1a6fa3 33%, #38b3c6 67%, #9be8d8 100%);
+}
+
+/*
+  The blend with an Abyss tint graded to it, for sections that carry white text: none over
+  Abyss/Marine, 40% at Teal, 66% at Reef. Abyss (not charcoal) keeps the light end blue-teal
+  instead of muddy grey. Worst case 4.74:1 for white text across the width.
+*/
+@utility bg-hero-blend-readable {
+  background-color: #0e3a5c;
+  background-image:
+    linear-gradient(90deg, rgb(8 36 59 / 0) 0%, rgb(8 36 59 / 0) 33%, rgb(8 36 59 / 0.4) 67%, rgb(8 36 59 / 0.66) 100%),
+    linear-gradient(90deg, #0e3a5c 0%, #1a6fa3 33%, #38b3c6 67%, #9be8d8 100%);
 }
 
 /* ---------- Base and browser surfaces ---------- */
@@ -72,7 +76,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-sun);
+  background: var(--color-reef);
   color: var(--color-ink);
 }
 
