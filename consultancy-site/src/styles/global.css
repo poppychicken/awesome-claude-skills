@@ -40,6 +40,15 @@
     linear-gradient(130deg, #00b3a1 0%, #00c9b3 42%, #2adcc6 72%, #00b4c4 100%);
 }
 
+/*
+  Hero blend: "mounir" Axis Blend from 21st.dev. A straight 90deg linear gradient; the original's
+  canvas soften/blur pass is approximated by the plain CSS stops.
+*/
+@utility bg-hero-blend {
+  background-color: #08243b;
+  background-image: linear-gradient(90deg, #08243b 0%, #12507a 33%, #2e8fa6 67%, #7dd0c0 100%);
+}
+
 /* ---------- Base and browser surfaces ---------- */
 html {
   scroll-behavior: smooth;

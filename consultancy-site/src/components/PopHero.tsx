@@ -8,8 +8,11 @@ import ParticlesBackground, {
 const WORD = "POP";
 const FACE = '"Bricolage Grotesque Variable"';
 const FALLBACK = '"Arial Black", Arial, sans-serif';
-/** Artwork that fills the letters, then becomes the backdrop of the panel the zoom opens into. */
-export const FIELD_IMAGE = "/images/hero/pop-field.jpg";
+/**
+ * The "mounir" Axis Blend from 21st.dev (90deg linear: Abyss, Marine, Teal, Reef). It fills the
+ * letters, then becomes the backdrop of the panel the zoom opens into. Defined in global.css.
+ */
+const FIELD_CLASS = "bg-hero-blend";
 
 /**
  * Word height for a visible height H, as large as fits. The word is centred at 46% of H and the
@@ -64,8 +67,7 @@ function StaticHero() {
       <div className="flex flex-col items-center gap-6">
         <p
           aria-hidden="true"
-          className="font-display font-extrabold leading-none bg-cover bg-center bg-clip-text text-transparent text-[min(50svh,34vw)]"
-          style={{ backgroundImage: `url(${FIELD_IMAGE})`, backgroundColor: "#00c2ae" }}
+          className="font-display font-extrabold leading-none bg-hero-blend bg-clip-text text-transparent text-[min(50svh,34vw)]"
         >
           {WORD}
         </p>
@@ -106,8 +108,7 @@ export default function PopHero() {
   }, [family]);
 
   useEffect(() => {
-    // Glyph Portal measures the font once at mount, so wait for the brand face first, and for the
-    // artwork so the letters don't mount empty.
+    // Glyph Portal measures the font once at mount, so wait for the brand face first.
     let settled = false;
     const finish = (value: string) => {
       if (!settled) {
@@ -118,18 +119,14 @@ export default function PopHero() {
     // Pass only the loaded face. The portal runs document.fonts.check() on every family it is
     // given and goes static if any fails; Safari fails system fonts such as Arial Black (absent on
     // iOS). The portal appends its own Arial Black fallback after that check.
-    const loadedFamily = () =>
-      document.fonts.check(`800 100px ${FACE}`, WORD) ? FACE : FALLBACK;
-    const font = document.fonts.load(`800 100px ${FACE}`, WORD).then(
-      (faces) => (faces.length ? FACE : FALLBACK),
-      () => FALLBACK,
+    const timeout = window.setTimeout(
+      () => finish(document.fonts.check(`800 100px ${FACE}`, WORD) ? FACE : FALLBACK),
+      1600,
     );
-    const picture = new Image();
-    picture.src = FIELD_IMAGE;
-    const art = picture.decode().catch(() => undefined);
-    // On a slow connection, start anyway; the field shows solid teal until the picture arrives.
-    const timeout = window.setTimeout(() => finish(loadedFamily()), 2000);
-    Promise.all([font, art]).then(([value]) => finish(value));
+    document.fonts.load(`800 100px ${FACE}`, WORD).then(
+      (faces) => finish(faces.length ? FACE : FALLBACK),
+      () => finish(FALLBACK),
+    );
     return () => {
       settled = true;
       window.clearTimeout(timeout);
@@ -166,25 +163,24 @@ export default function PopHero() {
           }}
           background={
             <div
-              className="absolute inset-0 bg-teal"
+              className={`absolute inset-0 ${FIELD_CLASS}`}
               style={{ transform: "scale(var(--gp-field-scale,1))" }}
             >
-              <img
-                src={FIELD_IMAGE}
-                alt=""
-                className="h-full w-full object-cover"
-                decoding="async"
-              />
-              {/* Lifts the artwork's near-black corners off the charcoal ground so every letter
+              {/* Lifts the blend's dark Abyss end off the charcoal ground so every letter
                   keeps its edge; fades out as the panel opens. */}
               <div
                 className="absolute inset-0 bg-teal"
-                style={{ opacity: "calc((1 - var(--gp-reveal, 0)) * 0.22)" }}
+                style={{ opacity: "calc((1 - var(--gp-reveal, 0)) * 0.3)" }}
               />
-              {/* Darkens the artwork as the panel text fades in, so white text stays readable. */}
+              {/* Fades in with the panel text, graded to the blend: none over Abyss/Marine (already
+                  8:1+ with white), building to 50% charcoal over Reef. Worst case 5.2:1 for white text. */}
               <div
-                className="absolute inset-0 bg-charcoal"
-                style={{ opacity: "calc(var(--gp-reveal, 0) * 0.62)" }}
+                className="absolute inset-0"
+                style={{
+                  opacity: "var(--gp-reveal, 0)",
+                  backgroundImage:
+                    "linear-gradient(90deg, rgb(18 19 20 / 0) 0%, rgb(18 19 20 / 0) 33%, rgb(18 19 20 / 0.24) 67%, rgb(18 19 20 / 0.5) 100%)",
+                }}
               />
             </div>
           }
