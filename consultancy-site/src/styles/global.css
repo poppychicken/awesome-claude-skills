@@ -89,7 +89,31 @@ p {
   text-wrap: pretty;
 }
 
-/* ---------- Home hero (Glyph Portal) ---------- */
+/* ---------- Home hero (Glyph Portal over particles) ---------- */
+/* clip, not hidden: it trims the particle layer without creating a scroll container, so sticky still works. */
+[data-pop-hero] {
+  overflow: clip;
+}
+/* The particle layer pins behind the hero scene for as long as the hero is on screen. */
+[data-pop-particles] {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  margin-bottom: -100svh;
+  z-index: 0;
+}
+/* Let pointer events fall through to the particle canvas; real controls opt back in. */
+[data-pop-hero] > section,
+[data-pop-hero] [data-gp-pin] {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+/* The portal manages its own links (they fade out as you scroll); the static poster needs its button back. */
+[data-pop-static] a,
+[data-pop-hero] [data-gp-content] {
+  pointer-events: auto;
+}
 [data-pop-hero] [data-gp-caption] {
   inset: auto 24px 6%;
   justify-content: center;
