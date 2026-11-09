@@ -34,6 +34,8 @@ interface FeatureStepsProps {
   titleId?: string
   autoPlayInterval?: number
   imageHeight?: string
+  /** Fade the bottom of the image into the page background. Suits photos; turn off for artwork. */
+  imageFade?: boolean
 }
 
 const TICK = 100
@@ -46,6 +48,7 @@ export function FeatureSteps({
   titleId,
   autoPlayInterval = 3000,
   imageHeight = "lg:h-[400px]",
+  imageFade = true,
 }: FeatureStepsProps) {
   const [currentFeature, setCurrentFeature] = useState(0)
   const [progress, setProgress] = useState(0)
@@ -208,7 +211,9 @@ export function FeatureSteps({
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                {imageFade && (
+                  <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                )}
               </motion.div>
             </AnimatePresence>
           </div>

@@ -2,14 +2,14 @@
 import { FeatureSteps } from '@/components/ui/feature-section';
 
 // Sample copy: the three areas of work. Edit freely; keep claims to what you can stand behind.
-// Photos: Unsplash (free licence), self-hosted in public/images/services.
+// Images: supplied abstract teal artwork, self-hosted in public/images/services (decorative, so alt is empty).
 const services = [
   {
     step: 'Strategy',
     title: 'Strategy',
     content: 'Set a clear direction, then make the hard choices that get you there.',
     image: '/images/services/strategy.jpg',
-    alt: 'A leadership team mapping priorities on sticky notes in a workshop',
+    alt: '',
     points: [
       'Growth and corporate strategy',
       'Market, customer and competitor insight',
@@ -22,7 +22,7 @@ const services = [
     title: 'AI',
     content: 'Find where AI creates real value in your business, then put it to work safely.',
     image: '/images/services/ai.jpg',
-    alt: 'Close-up of a circuit board',
+    alt: '',
     points: [
       'AI opportunity assessment and business case',
       'Use-case prioritisation and roadmap',
@@ -35,7 +35,7 @@ const services = [
     title: 'Digital Transformation',
     content: 'Modernise how your business runs, with people, process and technology moving together.',
     image: '/images/services/digital-transformation.jpg',
-    alt: 'The Earth at night from orbit, with city lights forming a network',
+    alt: '',
     points: [
       'Process redesign and automation',
       'Technology and data roadmap',
@@ -55,6 +55,7 @@ const services = [
     description="Three areas of work, delivered by the same two people. Most clients start with one and bring us into the others as the work grows."
     autoPlayInterval={6000}
     imageHeight="lg:h-[460px]"
+    imageFade={false}
     className="mx-auto max-w-6xl px-4 pt-24 pb-16 sm:px-6 sm:pt-32 md:px-6 md:pt-32 md:pb-24"
   />
 </section>
