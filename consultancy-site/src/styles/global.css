@@ -1,14 +1,15 @@
 @import 'tailwindcss';
 
-/* Pop Consulting: teal leads. Aqua lights it up; coral and sun are small sparks of pop. */
+/* Pop Consulting: vivid teal leads, carrying dark ink. Coral and sun are small sparks of pop. */
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, sans-serif;
 
-  --color-teal: #007a74;
-  --color-teal-deep: #00423f;
-  --color-teal-night: #022a29;
-  --color-aqua: #3ee6cc;
+  --color-teal: #00c2ae; /* fills and buttons; pair with ink text */
+  --color-teal-ink: #00786e; /* teal text and icons on light backgrounds (5:1) */
+  --color-teal-deep: #006b63; /* bands that carry white text */
+  --color-teal-night: #022a28; /* hero ground and footer */
+  --color-aqua: #5ff5dc;
   --color-coral: #ff5f4a;
   --color-sun: #ffd23f;
 
@@ -16,24 +17,24 @@
   --color-muted: #48605d;
   --color-line: #d5e5e0;
   --color-paper: #f5faf7;
-  --color-accent: #007a74;
-  --color-accent-soft: #dcf2ec;
+  --color-accent: #00786e;
+  --color-accent-soft: #d4f5ee;
 }
 
 /*
-  Brand field: deep teal to bright teal. The light end stops at #007a74 so white
-  body text keeps at least 4.5:1 across the whole surface.
+  Brand field: vivid teal into cyan with a sun glow. It carries ink text, which stays
+  at 6:1 or better across the whole surface.
 */
 @utility bg-brand-gradient {
   background-image:
-    radial-gradient(circle at 86% 12%, rgb(62 230 204 / 0.1), transparent 30%),
-    radial-gradient(circle at 6% 94%, rgb(255 95 74 / 0.18), transparent 32%),
-    linear-gradient(130deg, #022a29 0%, #00423f 32%, #00615c 66%, #007a74 100%);
+    radial-gradient(circle at 86% 14%, rgb(255 210 63 / 0.28), transparent 30%),
+    radial-gradient(circle at 8% 92%, rgb(95 245 220 / 0.5), transparent 40%),
+    linear-gradient(130deg, #00b3a1 0%, #00c9b3 42%, #2adcc6 72%, #00b4c4 100%);
 }
 
 /* Only used by the no-JS / pre-font poster, which stands in for the portal's ink. */
 @utility text-brand-gradient {
-  background-image: linear-gradient(100deg, #00423f 0%, #007a74 55%, #00a396 100%);
+  background-image: linear-gradient(100deg, #00b3a1 0%, #00c9b3 50%, #2adcc6 100%);
   background-clip: text;
   color: transparent;
 }
@@ -41,8 +42,8 @@
 /* ---------- Base and browser surfaces ---------- */
 html {
   scroll-behavior: smooth;
-  accent-color: var(--color-teal);
-  caret-color: var(--color-teal);
+  accent-color: var(--color-teal-ink);
+  caret-color: var(--color-teal-ink);
   scrollbar-color: color-mix(in oklab, var(--color-teal) 45%, var(--color-paper)) var(--color-paper);
 }
 
@@ -66,7 +67,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-teal);
+  outline: 2px solid var(--color-teal-ink);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -94,7 +95,7 @@ p {
   justify-content: center;
   font-family: var(--font-sans);
   font-size: 13px;
-  color: var(--color-muted);
+  color: rgb(255 255 255 / 0.78);
 }
 [data-pop-hero] [data-gp-hint] {
   display: none;
@@ -103,7 +104,7 @@ p {
   gap: 8px;
 }
 [data-pop-hero] [data-gp-enter]:hover {
-  color: var(--color-ink);
+  color: #fff;
 }
 /* Swap the component's text arrow for a drawn one (lucide arrow-down). */
 [data-pop-hero] [data-gp-enter] > span {
@@ -127,7 +128,7 @@ p {
   margin: 0;
   max-width: 30ch;
   font: 600 clamp(20px, 1.2rem + 0.9vw, 30px) / 1.25 var(--font-display);
-  color: var(--color-ink);
+  color: #fff;
 }
 @container (max-height: 560px) {
   [data-pop-lede] {

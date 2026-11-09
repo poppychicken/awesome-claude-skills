@@ -30,8 +30,8 @@ function BookButton({ inverse = false }: { inverse?: boolean }) {
       className={
         'inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ' +
         (inverse
-          ? 'bg-white text-ink hover:bg-sun focus-visible:outline-white'
-          : 'bg-teal text-white hover:bg-teal-night focus-visible:outline-teal')
+          ? 'bg-ink text-white hover:bg-teal-deep focus-visible:outline-ink'
+          : 'bg-teal text-ink hover:bg-white focus-visible:outline-teal')
       }
     >
       Book a call <ArrowRight aria-hidden="true" className="size-4" />
@@ -42,7 +42,7 @@ function BookButton({ inverse = false }: { inverse?: boolean }) {
 /** Static version: server render, no-JS, and the moment before the brand font is ready. */
 function StaticHero() {
   return (
-    <section className="min-h-[calc(100svh-4rem)] grid place-items-center px-4 py-20 text-center">
+    <section className="min-h-[calc(100svh-4rem)] grid place-items-center bg-teal-night px-4 py-20 text-center text-white">
       <div className="flex flex-col items-center gap-6">
         <p
           aria-hidden="true"
@@ -95,10 +95,10 @@ export default function PopHero() {
         scrollLength={2.2}
         enterLabel="Scroll to step inside"
         style={{
-          '--gp-paper': '#f5faf7',
-          '--gp-ink': '#0b2423',
-          '--gp-field': '#007a74',
-          '--gp-foreground': '#ffffff',
+          '--gp-paper': '#022a28',
+          '--gp-ink': '#ffffff',
+          '--gp-field': '#00c2ae',
+          '--gp-foreground': '#0b2423',
         }}
         background={
           <div
@@ -114,14 +114,14 @@ export default function PopHero() {
         }
       >
         <div className="mx-auto w-full max-w-6xl flex flex-col items-start gap-12">
-          <h2 className="max-w-3xl text-[clamp(2rem,1.2rem+3vw,3.5rem)] font-bold leading-[1.05] text-white">
+          <h2 className="max-w-3xl text-[clamp(2rem,1.2rem+3vw,3.5rem)] font-bold leading-[1.05] text-ink">
             From AI ambition to results your business can see.
           </h2>
           <div className="grid w-full gap-8 md:grid-cols-3 md:gap-12">
             {reasons.map((r) => (
-              <div key={r.title} className="border-t border-white/35 pt-5">
-                <h3 className="text-xl font-semibold text-white">{r.title}</h3>
-                <p className="mt-2 max-w-[38ch] text-white">{r.body}</p>
+              <div key={r.title} className="border-t border-ink/25 pt-5">
+                <h3 className="text-xl font-semibold text-ink">{r.title}</h3>
+                <p className="mt-2 max-w-[38ch] text-ink">{r.body}</p>
               </div>
             ))}
           </div>
