@@ -82,6 +82,20 @@ export default function PopHero() {
     }
   }, []);
 
+  // The portal makes the hero much taller than the static poster, which pushes every section
+  // down after the browser has already jumped to a #section link. Re-apply that jump once.
+  useEffect(() => {
+    if (!family) return;
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    let frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' });
+      });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [family]);
+
   useEffect(() => {
     // Glyph Portal measures the font once at mount, so wait for the brand face first.
     let settled = false;

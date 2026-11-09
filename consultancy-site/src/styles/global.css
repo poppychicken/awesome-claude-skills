@@ -14,11 +14,19 @@
   --color-sun: #ffd23f;
 
   --color-ink: #161819;
-  --color-muted: #565c5e;
   --color-line: #d5e5e0;
   --color-paper: #f5faf7;
   --color-accent: #00786e;
   --color-accent-soft: #d4f5ee;
+
+  /* shadcn semantic names, mapped onto the palette so ui/ components drop in unchanged. */
+  --color-background: #f5faf7;
+  --color-foreground: #161819;
+  --color-primary: #00c2ae;
+  --color-primary-foreground: #161819;
+  --color-muted: #e6eeeb; /* subtle surface */
+  --color-muted-foreground: #565c5e; /* secondary text, 6.4:1 on paper */
+  --color-border: #d5e5e0;
 }
 
 /*

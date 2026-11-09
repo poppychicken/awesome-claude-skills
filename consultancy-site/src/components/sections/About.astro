@@ -6,7 +6,7 @@ import { site } from '../../config';
   <div class="mx-auto grid max-w-6xl gap-14 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:gap-20">
     <div>
       <h2 id="about-title" class="text-5xl font-bold sm:text-6xl">About</h2>
-      <div class="mt-8 max-w-[60ch] space-y-5 text-lg text-muted">
+      <div class="mt-8 max-w-[60ch] space-y-5 text-lg text-muted-foreground">
         <!-- Placeholder: replace with your own story. -->
         <p>
           {site.name} is two former executives who have led businesses through major change. We started it because
@@ -22,7 +22,7 @@ import { site } from '../../config';
     </div>
 
     <div>
-      <h3 class="text-sm font-semibold text-muted">The founders</h3>
+      <h3 class="text-sm font-semibold text-muted-foreground">The founders</h3>
       <ul class="mt-4 divide-y divide-line border-y border-line">
         {
           site.founders.map((f) => (
@@ -31,7 +31,7 @@ import { site } from '../../config';
               <div>
                 <p class="font-display text-xl font-bold">{f.name}</p>
                 <p class="text-sm font-medium text-teal-ink">{f.role}</p>
-                <p class="mt-2 text-muted">{f.bio}</p>
+                <p class="mt-2 text-muted-foreground">{f.bio}</p>
               </div>
             </li>
           ))

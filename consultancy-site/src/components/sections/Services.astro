@@ -1,13 +1,16 @@
 ---
-import { Check } from 'lucide-react';
+import { FeatureSteps } from '@/components/ui/feature-section';
 
 // Sample copy: the three areas of work. Edit freely; keep claims to what you can stand behind.
+// Photos: Unsplash (free licence), self-hosted in public/images/services.
 const services = [
   {
+    step: 'Strategy',
     title: 'Strategy',
-    summary: 'Set a clear direction, then make the hard choices that get you there.',
-    when: 'For leadership teams facing a big call on where to compete, grow or invest.',
-    outcomes: [
+    content: 'Set a clear direction, then make the hard choices that get you there.',
+    image: '/images/services/strategy.jpg',
+    alt: 'A leadership team mapping priorities on sticky notes in a workshop',
+    points: [
       'Growth and corporate strategy',
       'Market, customer and competitor insight',
       'Operating model and organisation design',
@@ -15,10 +18,12 @@ const services = [
     ],
   },
   {
+    step: 'AI',
     title: 'AI',
-    summary: 'Find where AI creates real value in your business, then put it to work safely.',
-    when: 'For businesses that know AI matters but want a plan, not another pilot.',
-    outcomes: [
+    content: 'Find where AI creates real value in your business, then put it to work safely.',
+    image: '/images/services/ai.jpg',
+    alt: 'Close-up of a circuit board',
+    points: [
       'AI opportunity assessment and business case',
       'Use-case prioritisation and roadmap',
       'Build, buy or integrate, through to launch',
@@ -26,10 +31,12 @@ const services = [
     ],
   },
   {
+    step: 'Digital Transformation',
     title: 'Digital Transformation',
-    summary: 'Modernise how your business runs, with people, process and technology moving together.',
-    when: 'For organisations whose systems and ways of working are holding growth back.',
-    outcomes: [
+    content: 'Modernise how your business runs, with people, process and technology moving together.',
+    image: '/images/services/digital-transformation.jpg',
+    alt: 'The Earth at night from orbit, with city lights forming a network',
+    points: [
       'Process redesign and automation',
       'Technology and data roadmap',
       'Programme leadership and delivery assurance',
@@ -40,35 +47,14 @@ const services = [
 ---
 
 <section id="services" aria-labelledby="services-title" class="scroll-mt-16">
-  <div class="mx-auto max-w-6xl px-4 pt-24 pb-10 sm:px-6 sm:pt-32">
-    <div class="max-w-2xl">
-      <h2 id="services-title" class="text-5xl font-bold sm:text-6xl">Services</h2>
-      <p class="mt-5 text-lg text-muted">
-        Three areas of work, delivered by the same two people. Most clients start with one and bring us into the
-        others as the work grows.
-      </p>
-    </div>
-
-    <div class="mt-12">
-      {
-        services.map((s) => (
-          <article class="grid gap-6 border-t border-line py-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-12 md:py-12">
-            <div>
-              <h3 class="text-3xl font-bold">{s.title}</h3>
-              <p class="mt-3 max-w-[40ch] text-lg text-ink">{s.summary}</p>
-              <p class="mt-3 max-w-[44ch] text-muted">{s.when}</p>
-            </div>
-            <ul class="grid content-start gap-3 sm:grid-cols-2 sm:gap-x-8">
-              {s.outcomes.map((o) => (
-                <li class="flex items-start gap-3">
-                  <Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-teal-ink" strokeWidth={2.25} />
-                  <span>{o}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))
-      }
-    </div>
-  </div>
+  <FeatureSteps
+    client:visible
+    features={services}
+    title="Services"
+    titleId="services-title"
+    description="Three areas of work, delivered by the same two people. Most clients start with one and bring us into the others as the work grows."
+    autoPlayInterval={6000}
+    imageHeight="lg:h-[460px]"
+    className="mx-auto max-w-6xl px-4 pt-24 pb-16 sm:px-6 sm:pt-32 md:px-6 md:pt-32 md:pb-24"
+  />
 </section>
