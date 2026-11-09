@@ -40,13 +40,6 @@
     linear-gradient(130deg, #00b3a1 0%, #00c9b3 42%, #2adcc6 72%, #00b4c4 100%);
 }
 
-/* Only used by the no-JS / pre-font poster, which stands in for the portal's ink. */
-@utility text-brand-gradient {
-  background-image: linear-gradient(100deg, #00b3a1 0%, #00c9b3 50%, #2adcc6 100%);
-  background-clip: text;
-  color: transparent;
-}
-
 /* ---------- Base and browser surfaces ---------- */
 html {
   scroll-behavior: smooth;
@@ -133,6 +126,25 @@ p {
   font-size: 13px;
   color: rgb(255 255 255 / 0.78);
 }
+/* The visible scroll cue lives in the lede stack (data-pop-cue) so it can never collide with the
+   button. Keep the portal's skip link for keyboard users, visually hidden until focused. */
+[data-pop-hero] [data-gp-caption]:not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* Only on screens tall enough to fit it under the larger word (CUE_MIN_H in PopHero.tsx). */
+[data-pop-cue] {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-top: -4px;
+  font: 13px/1.4 var(--font-sans);
+  color: rgb(255 255 255 / 0.78);
+}
 [data-pop-hero] [data-gp-hint] {
   display: none;
 }
@@ -166,13 +178,15 @@ p {
   font: 600 clamp(20px, 1.2rem + 0.9vw, 30px) / 1.25 var(--font-display);
   color: #fff;
 }
+@container (min-height: 1000px) {
+  [data-pop-cue] {
+    display: inline-flex;
+  }
+}
 @container (max-height: 560px) {
   [data-pop-lede] {
     top: calc(var(--gp-word-bottom, 50%) + 16px);
     gap: 14px;
-  }
-  [data-pop-hero] [data-gp-caption] {
-    display: none;
   }
 }
 [data-pop-hero] [data-gp-content] {

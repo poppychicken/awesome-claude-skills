@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import GlyphPortal from "@/components/ui/glyph-portal";
 import ParticlesBackground, {
   type ParticlesPalette,
@@ -8,6 +8,19 @@ import ParticlesBackground, {
 const WORD = "POP";
 const FACE = '"Bricolage Grotesque Variable"';
 const FALLBACK = '"Arial Black", Arial, sans-serif';
+/** Artwork that fills the letters, then becomes the backdrop of the panel the zoom opens into. */
+export const FIELD_IMAGE = "/images/hero/pop-field.jpg";
+
+/**
+ * Word height for a visible height H, as large as fits. The word is centred at 46% of H and the
+ * top 64px of the scene sits under the site header, so the stack below it (32px gap, headline,
+ * button, and on screens at least CUE_MIN_H tall a scroll cue) must end above the fold:
+ *   64 + 0.46H + h/2 + 32 + stack + 12 <= H   =>   h <= 1.08H - 2(108 + stack)
+ * Stack is ~185px with the cue and ~147px without it. Keep CUE_MIN_H in sync with global.css.
+ */
+const CUE_MIN_H = 1000;
+const wordHeight = (H: number) =>
+  Math.min(H * 0.55, Math.max(H * 0.3, 1.08 * H - (H >= CUE_MIN_H ? 586 : 510)));
 
 // Site palette: mostly teal, some aqua, the odd sun spark, on charcoal.
 const PARTICLES: ParticlesPalette = {
@@ -33,16 +46,11 @@ const reasons = [
 
 const headline = "Strategy, AI and digital transformation, led by former executives.";
 
-function BookButton({ inverse = false }: { inverse?: boolean }) {
+function BookButton() {
   return (
     <a
       href="#contact"
-      className={
-        "inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 " +
-        (inverse
-          ? "bg-ink text-white hover:bg-graphite focus-visible:outline-ink"
-          : "bg-teal text-ink hover:bg-white focus-visible:outline-teal")
-      }
+      className="inline-flex items-center gap-2 rounded-full bg-teal px-6 py-3 font-medium text-ink transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
     >
       Book a call <ArrowRight aria-hidden="true" className="size-4" />
     </a>
@@ -56,7 +64,8 @@ function StaticHero() {
       <div className="flex flex-col items-center gap-6">
         <p
           aria-hidden="true"
-          className="font-display font-extrabold leading-none text-brand-gradient text-[min(38svh,30vw)]"
+          className="font-display font-extrabold leading-none bg-cover bg-center bg-clip-text text-transparent text-[min(50svh,34vw)]"
+          style={{ backgroundImage: `url(${FIELD_IMAGE})`, backgroundColor: "#00c2ae" }}
         >
           {WORD}
         </p>
@@ -97,7 +106,8 @@ export default function PopHero() {
   }, [family]);
 
   useEffect(() => {
-    // Glyph Portal measures the font once at mount, so wait for the brand face first.
+    // Glyph Portal measures the font once at mount, so wait for the brand face first, and for the
+    // artwork so the letters don't mount empty.
     let settled = false;
     const finish = (value: string) => {
       if (!settled) {
@@ -105,14 +115,21 @@ export default function PopHero() {
         setFamily(value);
       }
     };
-    const timeout = window.setTimeout(() => finish(FALLBACK), 1600);
-    document.fonts.load(`800 100px ${FACE}`, WORD).then(
-      // Pass only the loaded face. The portal runs document.fonts.check() on every family it is
-      // given and goes static if any fails; Safari fails system fonts such as Arial Black (absent on
-      // iOS). The portal appends its own Arial Black fallback after that check.
-      (faces) => finish(faces.length ? FACE : FALLBACK),
-      () => finish(FALLBACK),
+    // Pass only the loaded face. The portal runs document.fonts.check() on every family it is
+    // given and goes static if any fails; Safari fails system fonts such as Arial Black (absent on
+    // iOS). The portal appends its own Arial Black fallback after that check.
+    const loadedFamily = () =>
+      document.fonts.check(`800 100px ${FACE}`, WORD) ? FACE : FALLBACK;
+    const font = document.fonts.load(`800 100px ${FACE}`, WORD).then(
+      (faces) => (faces.length ? FACE : FALLBACK),
+      () => FALLBACK,
     );
+    const picture = new Image();
+    picture.src = FIELD_IMAGE;
+    const art = picture.decode().catch(() => undefined);
+    // On a slow connection, start anyway; the field shows solid teal until the picture arrives.
+    const timeout = window.setTimeout(() => finish(loadedFamily()), 2000);
+    Promise.all([font, art]).then(([value]) => finish(value));
     return () => {
       settled = true;
       window.clearTimeout(timeout);
@@ -138,38 +155,63 @@ export default function PopHero() {
           scrollLength={2.2}
           enterLabel="Scroll to step inside"
           onProgress={onProgress}
+          wordHeight={wordHeight}
+          wordWidth={0.92}
           style={{
             "--gp-paper": "transparent",
             "--gp-ink": "#ffffff",
-            "--gp-field": "#00c2ae",
-            "--gp-foreground": "#161819",
+            // Used as the panel background when motion is off (reduced motion).
+            "--gp-field": "#1d1f20",
+            "--gp-foreground": "#ffffff",
           }}
           background={
             <div
-              className="absolute inset-0 bg-brand-gradient"
+              className="absolute inset-0 bg-teal"
               style={{ transform: "scale(var(--gp-field-scale,1))" }}
-            />
+            >
+              <img
+                src={FIELD_IMAGE}
+                alt=""
+                className="h-full w-full object-cover"
+                decoding="async"
+              />
+              {/* Lifts the artwork's near-black corners off the charcoal ground so every letter
+                  keeps its edge; fades out as the panel opens. */}
+              <div
+                className="absolute inset-0 bg-teal"
+                style={{ opacity: "calc((1 - var(--gp-reveal, 0)) * 0.22)" }}
+              />
+              {/* Darkens the artwork as the panel text fades in, so white text stays readable. */}
+              <div
+                className="absolute inset-0 bg-charcoal"
+                style={{ opacity: "calc(var(--gp-reveal, 0) * 0.62)" }}
+              />
+            </div>
           }
           front={
             <div data-pop-lede>
               <h1>{headline}</h1>
               <BookButton />
+              {/* Visual cue only; the portal's own skip link stays available to keyboard users. */}
+              <span data-pop-cue aria-hidden="true">
+                Scroll to step inside <ArrowDown className="size-4" />
+              </span>
             </div>
           }
         >
           <div className="mx-auto w-full max-w-6xl flex flex-col items-start gap-12">
-            <h2 className="max-w-3xl text-[clamp(2rem,1.2rem+3vw,3.5rem)] font-bold leading-[1.05] text-ink">
+            <h2 className="max-w-3xl text-[clamp(2rem,1.2rem+3vw,3.5rem)] font-bold leading-[1.05] text-white">
               From AI ambition to results your business can see.
             </h2>
             <div className="grid w-full gap-8 md:grid-cols-3 md:gap-12">
               {reasons.map((r) => (
-                <div key={r.title} className="border-t border-ink/25 pt-5">
-                  <h3 className="text-xl font-semibold text-ink">{r.title}</h3>
-                  <p className="mt-2 max-w-[38ch] text-ink">{r.body}</p>
+                <div key={r.title} className="border-t border-white/30 pt-5">
+                  <h3 className="text-xl font-semibold text-white">{r.title}</h3>
+                  <p className="mt-2 max-w-[38ch] text-white">{r.body}</p>
                 </div>
               ))}
             </div>
-            <BookButton inverse />
+            <BookButton />
           </div>
         </GlyphPortal>
       ) : (

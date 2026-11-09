@@ -4,6 +4,8 @@
  * Glyph Portal © 2026 Christian Katzmann. MIT.
  * Origin: UsefulPortal.astro on https://ktzm.dk → UsefulPortal.tsx → ClarityPortal.tsx.
  * A scroll-driven camera through live type. Keep this notice with copies.
+ *
+ * Pop Consulting changes: optional wordHeight / wordWidth sizing props.
  */
 import { useId, useLayoutEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
@@ -35,6 +37,10 @@ export type GlyphPortalProps = {
   style?: GlyphPortalStyle;
   /** Called once per rendered scroll frame, never through React state. */
   onProgress?: (progress: number) => void;
+  /** Pop Consulting addition: target word height in px for a visible height H (default 0.38·H). */
+  wordHeight?: (H: number) => number;
+  /** Pop Consulting addition: maximum word width as a fraction of the width (default 0.84). */
+  wordWidth?: number;
 };
 
 const clamp = (n: number, a = 0, b = 1) => Math.min(b, Math.max(a, n));
@@ -89,13 +95,15 @@ function scrollParent(element: HTMLElement): HTMLElement | null {
 export default function GlyphPortal({
   word = "SUBLIME", focusChar, interactive = true, background, front, children, scrollLength = 2.4,
   fontFamily = DEFAULT_FONT, fontWeight = 900, annotations = false,
-  enterLabel = "Enter section", className, style, onProgress,
+  enterLabel = "Enter section", className, style, onProgress, wordHeight: wordHeightFn, wordWidth = 0.84,
 }: GlyphPortalProps) {
   const uid = `gp-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
   const clipId = `${uid}-clip`;
   const sectionRef = useRef<HTMLElement>(null);
   const progressRef = useRef(onProgress);
   useLayoutEffect(() => { progressRef.current = onProgress; }, [onProgress]);
+  const sizeRef = useRef({ wordHeightFn, wordWidth });
+  useLayoutEffect(() => { sizeRef.current = { wordHeightFn, wordWidth }; }, [wordHeightFn, wordWidth]);
   const text = word.trim().normalize("NFC") || "SUBLIME";
   let characterOffset = 0;
   const characters = Array.from(text, (char) => {
@@ -249,8 +257,10 @@ export default function GlyphPortal({
       art.setAttribute("viewBox", `0 0 ${W} ${H}`);
       if (fontDirty) { ready = readInk(); fontDirty = false; }
       if (!ready) return;
-      const wordHeight = hasFront && H < 480 ? Math.min(H * .38, Math.max(24, H - 264)) : H * .38;
-      startScale = Math.min(W * 0.84 / bounds.width, wordHeight / bounds.height);
+      const size = sizeRef.current;
+      const preferred = size.wordHeightFn ? size.wordHeightFn(H) : H * .38;
+      const wordHeight = hasFront && H < 480 ? Math.min(preferred, Math.max(24, H - 264)) : preferred;
+      startScale = Math.min(W * size.wordWidth / bounds.width, wordHeight / bounds.height);
       // The whole viewport fits inside measured ink, even with the small camera bank.
       select(target);
       for (const button of buttons) {
