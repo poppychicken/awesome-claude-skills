@@ -107,7 +107,10 @@ export default function PopHero() {
     };
     const timeout = window.setTimeout(() => finish(FALLBACK), 1600);
     document.fonts.load(`800 100px ${FACE}`, WORD).then(
-      (faces) => finish(faces.length ? `${FACE}, ${FALLBACK}` : FALLBACK),
+      // Pass only the loaded face. The portal runs document.fonts.check() on every family it is
+      // given and goes static if any fails; Safari fails system fonts such as Arial Black (absent on
+      // iOS). The portal appends its own Arial Black fallback after that check.
+      (faces) => finish(faces.length ? FACE : FALLBACK),
       () => finish(FALLBACK),
     );
     return () => {
