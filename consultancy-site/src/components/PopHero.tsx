@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import GlyphPortal from '@/components/ui/glyph-portal';
 
 const WORD = 'POP';
-const FACE = '"Bricolage Grotesque"';
+const FACE = '"Bricolage Grotesque Variable"';
 const FALLBACK = '"Arial Black", Arial, sans-serif';
 
 const reasons = [
@@ -44,7 +44,6 @@ function StaticHero() {
   return (
     <section className="min-h-[calc(100svh-4rem)] grid place-items-center px-4 py-20 text-center">
       <div className="flex flex-col items-center gap-6">
-        <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-violet">Pop Consulting</p>
         <p
           aria-hidden="true"
           className="font-display font-extrabold leading-none text-brand-gradient text-[min(38svh,30vw)]"
@@ -108,13 +107,10 @@ export default function PopHero() {
           />
         }
         front={
-          <>
-            <p data-pop-eyebrow>Pop Consulting</p>
-            <div data-pop-lede>
-              <h1>{headline}</h1>
-              <BookButton />
-            </div>
-          </>
+          <div data-pop-lede>
+            <h1>{headline}</h1>
+            <BookButton />
+          </div>
         }
       >
         <div className="mx-auto w-full max-w-6xl flex flex-col items-start gap-12">
@@ -122,13 +118,10 @@ export default function PopHero() {
             From AI ambition to results your business can see.
           </h2>
           <div className="grid w-full gap-8 md:grid-cols-3 md:gap-12">
-            {reasons.map((r, i) => (
-              <div key={r.title} className="border-t border-white/30 pt-5">
-                <h3 className="text-xl font-semibold text-white">
-                  <span className="mr-3 font-mono text-xs tracking-widest text-sun">0{i + 1}</span>
-                  {r.title}
-                </h3>
-                <p className="mt-2 text-white/90">{r.body}</p>
+            {reasons.map((r) => (
+              <div key={r.title} className="border-t border-white/35 pt-5">
+                <h3 className="text-xl font-semibold text-white">{r.title}</h3>
+                <p className="mt-2 max-w-[38ch] text-white">{r.body}</p>
               </div>
             ))}
           </div>
