@@ -30,7 +30,7 @@ function BookButton({ inverse = false }: { inverse?: boolean }) {
       className={
         'inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ' +
         (inverse
-          ? 'bg-ink text-white hover:bg-teal-deep focus-visible:outline-ink'
+          ? 'bg-ink text-white hover:bg-graphite focus-visible:outline-ink'
           : 'bg-teal text-ink hover:bg-white focus-visible:outline-teal')
       }
     >
@@ -42,7 +42,7 @@ function BookButton({ inverse = false }: { inverse?: boolean }) {
 /** Static version: server render, no-JS, and the moment before the brand font is ready. */
 function StaticHero() {
   return (
-    <section className="min-h-[calc(100svh-4rem)] grid place-items-center bg-teal-night px-4 py-20 text-center text-white">
+    <section className="min-h-[calc(100svh-4rem)] grid place-items-center bg-charcoal px-4 py-20 text-center text-white">
       <div className="flex flex-col items-center gap-6">
         <p
           aria-hidden="true"
@@ -95,10 +95,10 @@ export default function PopHero() {
         scrollLength={2.2}
         enterLabel="Scroll to step inside"
         style={{
-          '--gp-paper': '#022a28',
+          '--gp-paper': '#121314',
           '--gp-ink': '#ffffff',
           '--gp-field': '#00c2ae',
-          '--gp-foreground': '#0b2423',
+          '--gp-foreground': '#161819',
         }}
         background={
           <div

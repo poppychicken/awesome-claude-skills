@@ -1,20 +1,20 @@
 @import 'tailwindcss';
 
-/* Pop Consulting: vivid teal leads, carrying dark ink. Coral and sun are small sparks of pop. */
+/* Pop Consulting: vivid teal against near-black charcoal. Coral and sun are small sparks of pop. */
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, sans-serif;
 
   --color-teal: #00c2ae; /* fills and buttons; pair with ink text */
   --color-teal-ink: #00786e; /* teal text and icons on light backgrounds (5:1) */
-  --color-teal-deep: #006b63; /* bands that carry white text */
-  --color-teal-night: #022a28; /* hero ground and footer */
+  --color-graphite: #1d1f20; /* bands that carry white text */
+  --color-charcoal: #121314; /* hero ground and footer */
   --color-aqua: #5ff5dc;
   --color-coral: #ff5f4a;
   --color-sun: #ffd23f;
 
-  --color-ink: #0b2423;
-  --color-muted: #48605d;
+  --color-ink: #161819;
+  --color-muted: #565c5e;
   --color-line: #d5e5e0;
   --color-paper: #f5faf7;
   --color-accent: #00786e;
