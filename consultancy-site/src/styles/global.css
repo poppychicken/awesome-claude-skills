@@ -110,11 +110,15 @@ p {
   margin-bottom: -100svh;
   z-index: 0;
 }
+/* Lift the hero scene above the particle layer. Only the outer section gets a z-index: giving
+   the pinned scene one would paint it over its sibling content panel and hide the text. */
+[data-pop-hero] > section {
+  position: relative;
+  z-index: 1;
+}
 /* Let pointer events fall through to the particle canvas; real controls opt back in. */
 [data-pop-hero] > section,
 [data-pop-hero] [data-gp-pin] {
-  position: relative;
-  z-index: 1;
   pointer-events: none;
 }
 /* The portal manages its own links (they fade out as you scroll); the static poster needs its button back. */
