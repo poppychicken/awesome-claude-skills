@@ -16,6 +16,7 @@ npm run preview
 - `src/config.ts`: name, tagline, email, nav, and **`bookingUrl`** (your Cal.com or Calendly link)
 - `src/styles/global.css`: colours and fonts (`@theme` tokens)
 - `src/pages/`: `index`, `services`, `about`, `book`, `404`
+- `scripts/gradient-map.cjs`: recolour any image to the brand blend (`node scripts/gradient-map.cjs in.jpg out.jpg`)
 - `src/components/PopHero.tsx`: home hero built on `src/components/ui/glyph-portal.tsx` (MIT, Christian Katzmann)
 - `astro.config.mjs`: production domain (`https://pop.consulting`)
 
